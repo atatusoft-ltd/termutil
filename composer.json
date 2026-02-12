@@ -1,0 +1,30 @@
+{
+  "name": "atatusoft-ltd/termutil",
+  "version": "1.0.0",
+  "description": "A collection of utilities to help control ANSI powered terminals.",
+  "type": "library",
+  "require-dev": {
+    "phpstan/phpstan": "^2.1",
+    "pestphp/pest": "^4.3"
+  },
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Atatusoft\\Termutil\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Andrew Masiye",
+      "email": "amasiye313@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^8.4"
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  }
+}
