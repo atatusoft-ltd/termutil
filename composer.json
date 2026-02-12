@@ -11,7 +11,8 @@
   "autoload": {
     "psr-4": {
       "Atatusoft\\Termutil\\": "src/"
-    }
+    },
+    "files": [ "src/Constants.php" ]
   },
   "authors": [
     {
