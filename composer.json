@@ -7,7 +7,10 @@
     "psr-4": {
       "Atatusoft\\Termutil\\": "src/"
     },
-    "files": [ "src/Constants.php" ]
+    "files": [
+      "src/Constants.php",
+      "src/Functions.php"
+    ]
   },
   "authors": [
     {
