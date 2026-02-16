@@ -41,7 +41,7 @@ trait StaticObservableTrait
      * @param ObservableInterface|StaticObserverInterface ...$observers The observers to add.
      * @return void
      */
-    public function addObservers(ObservableInterface|StaticObserverInterface ...$observers): void
+    public static function addObservers(ObservableInterface|StaticObserverInterface ...$observers): void
     {
         foreach ($observers as $observer) {
             if ($observer instanceof ObserverInterface) {
@@ -58,7 +58,7 @@ trait StaticObservableTrait
      * @param ObservableInterface|StaticObserverInterface ...$observers The observers to remove.
      * @return void
      */
-    public function removeObservers(ObservableInterface|StaticObserverInterface ...$observers): void
+    public static function removeObservers(ObservableInterface|StaticObserverInterface ...$observers): void
     {
         foreach ($observers as $observer) {
             if ($observer instanceof ObserverInterface) {
@@ -75,14 +75,14 @@ trait StaticObservableTrait
      * @param Event $event The event to notify the observers of.
      * @return void
      */
-    public function notify(Event $event): void
+    public static function notify(Event $event): void
     {
         foreach (self::$observers as $observer) {
-            $observer->onNotify($this, $event);
+            $observer->onNotify(null, $event);
         }
 
         foreach (self::$staticObservers as $staticObserver) {
-            $staticObserver::onNotify($this, $event);
+            $staticObserver::onNotify(null, $event);
         }
     }
 }
