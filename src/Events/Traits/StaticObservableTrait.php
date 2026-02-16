@@ -48,6 +48,12 @@ trait StaticObservableTrait
                 self::$observers->add($observer);
             } elseif ($observer instanceof StaticObserverInterface) {
                 self::$staticObservers->add($observer);
+            } elseif (is_string($observer)) {
+                if (is_subclass_of($observer, ObservableInterface::class)) {
+                    self::$observers->add($observer);
+                } elseif (is_subclass_of($observer, StaticObserverInterface::class)) {
+                    self::$staticObservers->add($observer);
+                }
             }
         }
     }
@@ -65,6 +71,12 @@ trait StaticObservableTrait
                 self::$observers->remove($observer);
             } elseif ($observer instanceof StaticObserverInterface) {
                 self::$staticObservers->remove($observer);
+            } elseif (is_string($observer)) {
+                if (is_subclass_of($observer, ObservableInterface::class)) {
+                    self::$observers->remove($observer);
+                } elseif (is_subclass_of($observer, StaticObserverInterface::class)) {
+                    self::$staticObservers->remove($observer);
+                }
             }
         }
     }
