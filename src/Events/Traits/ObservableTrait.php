@@ -38,10 +38,10 @@ trait ObservableTrait
     /**
      * Adds observers to this observable.
      *
-     * @param ObservableInterface|StaticObserverInterface ...$observers The observers to add.
+     * @param ObservableInterface|StaticObserverInterface|class-string ...$observers The observers to add.
      * @return void
      */
-    public function addObservers(ObservableInterface|StaticObserverInterface ...$observers): void
+    public function addObservers(ObservableInterface|StaticObserverInterface|string ...$observers): void
     {
         foreach ($observers as $observer) {
             if ($observer instanceof ObserverInterface) {
@@ -61,10 +61,10 @@ trait ObservableTrait
     /**
      * Removes observers from this observable.
      *
-     * @param ObservableInterface|StaticObserverInterface ...$observers The observers to remove.
+     * @param ObservableInterface|StaticObserverInterface|class-string ...$observers The observers to remove.
      * @return void
      */
-    public function removeObservers(ObservableInterface|StaticObserverInterface ...$observers): void
+    public function removeObservers(ObservableInterface|StaticObserverInterface|string ...$observers): void
     {
         foreach ($observers as $observer) {
             if ($observer instanceof ObserverInterface) {
