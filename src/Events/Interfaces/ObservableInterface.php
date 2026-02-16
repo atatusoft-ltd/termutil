@@ -3,7 +3,6 @@
 namespace Atatusoft\Termutil\Events\Interfaces;
 
 use Atatusoft\Termutil\Events\Event;
-use phpDocumentor\Reflection\PseudoTypes\ClassString;
 
 /**
  * Interface ObservableInterface. Represents an observable object that can be observed by observers.
