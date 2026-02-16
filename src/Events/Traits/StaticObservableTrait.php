@@ -9,31 +9,31 @@ use Atatusoft\Termutil\Events\Interfaces\ObserverInterface;
 use Atatusoft\Termutil\Events\Interfaces\StaticObserverInterface;
 
 /**
- * The trait ObservableTrait. It provides the basic functionality for an observable, such as adding and removing
- * observers and notifying them of events.
+ * The trait StaticObservableTrait. It provides the basic functionality for a static observable, such as adding and
+ * removing observers and notifying them of events.
  *
- * @package Atatusoft\Termutil\Events\Traits
+ * @package Atatusoft\Termutil\Events\Traits;
  */
-trait ObservableTrait
+trait StaticObservableTrait
 {
     /**
      * @var ItemList<ObservableInterface> The observers.
      */
-    protected ItemList $observers;
+    protected static ItemList $observers;
     /**
      * @var ItemList<StaticObserverInterface> The static observers.
      */
-    protected ItemList $staticObservers;
+    protected static ItemList $staticObservers;
 
     protected function initializeObservers(): void
     {
         /** @var ItemList<ObserverInterface> $observers */
         $observers = new ItemList(ObserverInterface::class);
-        $this->observers = $observers;
+        self::$observers = $observers;
 
         /** @var ItemList<StaticObserverInterface> $staticObservers */
         $staticObservers = new ItemList(StaticObserverInterface::class);
-        $this->staticObservers = $staticObservers;
+        self::$staticObservers = $staticObservers;
     }
     /**
      * Adds observers to this observable.
@@ -45,9 +45,9 @@ trait ObservableTrait
     {
         foreach ($observers as $observer) {
             if ($observer instanceof ObserverInterface) {
-                $this->observers->add($observer);
+                self::$observers->add($observer);
             } elseif ($observer instanceof StaticObserverInterface) {
-                $this->staticObservers->add($observer);
+                self::$staticObservers->add($observer);
             }
         }
     }
@@ -62,9 +62,9 @@ trait ObservableTrait
     {
         foreach ($observers as $observer) {
             if ($observer instanceof ObserverInterface) {
-                $this->observers->remove($observer);
+                self::$observers->remove($observer);
             } elseif ($observer instanceof StaticObserverInterface) {
-                $this->staticObservers->remove($observer);
+                self::$staticObservers->remove($observer);
             }
         }
     }
@@ -77,11 +77,11 @@ trait ObservableTrait
      */
     public function notify(Event $event): void
     {
-        foreach ($this->observers as $observer) {
+        foreach (self::$observers as $observer) {
             $observer->onNotify($this, $event);
         }
 
-        foreach ($this->staticObservers as $staticObserver) {
+        foreach (self::$staticObservers as $staticObserver) {
             $staticObserver::onNotify($this, $event);
         }
     }
