@@ -7,6 +7,7 @@ use Atatusoft\Termutil\Events\Event;
 use Atatusoft\Termutil\Events\Interfaces\ObservableInterface;
 use Atatusoft\Termutil\Events\Interfaces\ObserverInterface;
 use Atatusoft\Termutil\Events\Interfaces\StaticObserverInterface;
+use Atatusoft\Termutil\Events\Traits\ObservableTrait;
 use Atatusoft\Termutil\IO\Console\Console;
 use Atatusoft\Termutil\IO\Console\Cursor;
 use Atatusoft\Termutil\IO\Enumerations\Color;
@@ -22,6 +23,8 @@ use Atatusoft\Termutil\UI\Windows\Interfaces\WindowInterface;
  */
 class Window implements WindowInterface
 {
+    use ObservableTrait;
+
     public const int DEFAULT_WINDOW_WIDTH = 80;
     public const int DEFAULT_WINDOW_HEIGHT = 30;
     /**
@@ -318,56 +321,6 @@ class Window implements WindowInterface
         $this->cursor = Console::cursor();
         $this->observers = new ItemList(ObserverInterface::class);
         $this->staticObservers = new ItemList(StaticObserverInterface::class);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function addObservers(ObservableInterface|StaticObserverInterface ...$observers): void
-    {
-        foreach ($observers as $observer) {
-            if (is_object($observer)) {
-                if (is_a($observer, ObserverInterface::class)) {
-                    $this->observers->add($observer);
-                }
-
-                if (is_a($observer, StaticObserverInterface::class)) {
-                    $this->staticObservers->add($observer);
-                }
-            }
-        }
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function removeObservers(ObservableInterface|StaticObserverInterface ...$observers): void
-    {
-        foreach ($observers as $observer) {
-            if (is_object($observer)) {
-                if (is_a($observer, ObserverInterface::class)) {
-                    $this->observers->remove($observer);
-                }
-
-                if (is_a($observer, StaticObserverInterface::class)) {
-                    $this->staticObservers->remove($observer);
-                }
-            }
-        }
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function notify(Event $event): void
-    {
-        foreach ($this->observers as $observer) {
-            $observer->onNotify($this, $event);
-        }
-
-        foreach ($this->staticObservers as $observer) {
-            $observer::onNotify($this, $event);
-        }
     }
 
     /**
