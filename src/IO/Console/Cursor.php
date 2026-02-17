@@ -2,6 +2,8 @@
 
 namespace Atatusoft\Termutil\IO\Console;
 
+use InvalidArgumentException;
+
 /**
  * Represents a cursor.
  *
