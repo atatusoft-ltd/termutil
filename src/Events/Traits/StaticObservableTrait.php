@@ -25,7 +25,7 @@ trait StaticObservableTrait
      */
     protected static ItemList $staticObservers;
 
-    protected function initializeObservers(): void
+    protected static function initializeObservers(): void
     {
         /** @var ItemList<ObserverInterface> $observers */
         $observers = new ItemList(ObserverInterface::class);
