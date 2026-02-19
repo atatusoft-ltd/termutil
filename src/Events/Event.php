@@ -4,6 +4,9 @@ namespace Atatusoft\Termutil\Events;
 
 use DateTimeImmutable;
 
+/**
+ * The Event class represents an event that takes place in the terminal.
+ */
 abstract class Event
 {
     protected(set) DateTimeImmutable $timestamp;
