@@ -270,6 +270,13 @@ class Window implements WindowInterface
                 }
             }
 
+            // TODO: Implement dynamic heigh adjustment vs clipping behaviour
+            $paddingLineCount = max(0, $this->innerHeight - count($content));
+
+            for ($line = 0; $line < $paddingLineCount; $line++) {
+                $content[] = $this->borderPack->vertical . str_repeat(' ', $this->innerWidth) . $this->borderPack->vertical;
+            }
+
             for ($row = 0; $row < $this->padding->bottomPadding; $row++) {
                 $output = $this->borderPack->vertical;
                 $output .= str_repeat(' ', $this->width - 2);
@@ -278,6 +285,22 @@ class Window implements WindowInterface
             }
 
             return $content;
+        }
+    }
+    /**
+     * @var int The width minus the left and right borders.
+     */
+    public int $innerWidth {
+        get {
+            return $this->width - 2;
+        }
+    }
+    /**
+     * @var int The height minus the top and bottom borders.
+     */
+    public int $innerHeight {
+        get {
+            return $this->height - 2;
         }
     }
 
