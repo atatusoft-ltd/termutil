@@ -4,6 +4,7 @@ namespace Atatusoft\Termutil\IO\Console;
 
 use Atatusoft\Termutil\Grid;
 use Atatusoft\Termutil\IO\Enumerations\Color;
+use Atatusoft\Termutil\IO\Enumerations\MouseTrackingMode;
 use Exception;
 
 /**
@@ -377,5 +378,26 @@ class Console
 
         $char = substr(self::$buffer[$y], $x, 1);
         return ord($char) === 0 ? " " : $char;
+    }
+
+    /**
+     * @param MouseTrackingMode $mode
+     * @param bool $withSGRExtendedMode
+     * @return void
+     */
+    public static function enableMouseReporting(
+        MouseTrackingMode $mode = MouseTrackingMode::ALL_MOTION_TRACKING,
+        bool $withSGRExtendedMode = true
+    ): void
+    {
+        echo $mode->getSequence(withSGRExtendedMode: $withSGRExtendedMode);
+    }
+
+    /**
+     * @return void
+     */
+    public static function disableMouseReporting(): void
+    {
+        echo "\033[?1003;1006l";
     }
 }
