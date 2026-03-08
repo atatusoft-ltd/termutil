@@ -14,18 +14,18 @@ interface ObservableInterface
     /**
      * Adds observers to this observable.
      *
-     * @param ObservableInterface|StaticObserverInterface|class-string ...$observers The observers to add.
+     * @param ObserverInterface|StaticObserverInterface|class-string ...$observers The observers to add.
      * @return void
      */
-    public function addObservers(ObservableInterface|StaticObserverInterface|string ...$observers): void;
+    public function addObservers(ObserverInterface|StaticObserverInterface|string ...$observers): void;
 
     /**
      * Removes observers from this observable.
      *
-     * @param ObservableInterface|StaticObserverInterface|class-string ...$observers The observers to remove.
+     * @param ObserverInterface|StaticObserverInterface|class-string ...$observers The observers to remove.
      * @return void
      */
-    public function removeObservers(ObservableInterface|StaticObserverInterface|string ...$observers): void;
+    public function removeObservers(ObserverInterface|StaticObserverInterface|string ...$observers): void;
 
     /**
      * Notifies the observers of this observable of an event.

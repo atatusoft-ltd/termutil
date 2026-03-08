@@ -17,7 +17,7 @@ use Atatusoft\Termutil\Events\Interfaces\StaticObserverInterface;
 trait ObservableTrait
 {
     /**
-     * @var ItemList<ObservableInterface> The observers.
+     * @var ItemList<ObserverInterface> The observers.
      */
     protected ItemList $observers;
     /**
@@ -38,10 +38,10 @@ trait ObservableTrait
     /**
      * Adds observers to this observable.
      *
-     * @param ObservableInterface|StaticObserverInterface|class-string ...$observers The observers to add.
+     * @param ObserverInterface|StaticObserverInterface|class-string ...$observers The observers to add.
      * @return void
      */
-    public function addObservers(ObservableInterface|StaticObserverInterface|string ...$observers): void
+    public function addObservers(ObserverInterface|StaticObserverInterface|string ...$observers): void
     {
         foreach ($observers as $observer) {
             if ($observer instanceof ObserverInterface) {
@@ -49,7 +49,7 @@ trait ObservableTrait
             } elseif ($observer instanceof StaticObserverInterface) {
                 $this->staticObservers->add($observer);
             } elseif (is_string($observer)) {
-                if (is_subclass_of($observer, ObservableInterface::class)) {
+                if (is_subclass_of($observer, ObserverInterface::class)) {
                     $this->observers->add($observer);
                 } elseif (is_subclass_of($observer, StaticObserverInterface::class)) {
                     $this->staticObservers->add($observer);
@@ -61,10 +61,10 @@ trait ObservableTrait
     /**
      * Removes observers from this observable.
      *
-     * @param ObservableInterface|StaticObserverInterface|class-string ...$observers The observers to remove.
+     * @param ObserverInterface|StaticObserverInterface|class-string ...$observers The observers to remove.
      * @return void
      */
-    public function removeObservers(ObservableInterface|StaticObserverInterface|string ...$observers): void
+    public function removeObservers(ObserverInterface|StaticObserverInterface|string ...$observers): void
     {
         foreach ($observers as $observer) {
             if ($observer instanceof ObserverInterface) {
@@ -72,7 +72,7 @@ trait ObservableTrait
             } elseif ($observer instanceof StaticObserverInterface) {
                 $this->staticObservers->remove($observer);
             } elseif (is_string($observer)) {
-                if (is_subclass_of($observer, ObservableInterface::class)) {
+                if (is_subclass_of($observer, ObserverInterface::class)) {
                     $this->observers->remove($observer);
                 } elseif (is_subclass_of($observer, StaticObserverInterface::class)) {
                     $this->staticObservers->remove($observer);
