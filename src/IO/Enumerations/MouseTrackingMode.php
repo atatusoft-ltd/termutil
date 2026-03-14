@@ -21,7 +21,7 @@ enum MouseTrackingMode: int
      */
     public function getSequence(bool $withSGRExtendedMode = true): string
     {
-        $sequence = "\003[?{$this->value}";
+        $sequence = "\033[?{$this->value}";
 
         if ($withSGRExtendedMode) {
             $sequence .= ";1006";
