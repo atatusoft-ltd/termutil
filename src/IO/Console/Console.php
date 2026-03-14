@@ -398,6 +398,6 @@ class Console
      */
     public static function disableMouseReporting(): void
     {
-        echo "\033[?1003;1006l";
+        echo "\033[?1000;1002;1003;1006l";
     }
 }
