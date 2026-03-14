@@ -17,7 +17,7 @@ interface StaticObservableInterface
     /**
      * Removes observers from this observable.
      *
-     * @param ObservableInterface|StaticObserverInterface|class-string ...$observers The observers to remove.
+     * @param ObserverInterface|StaticObserverInterface|class-string ...$observers The observers to remove.
      * @return void
      */
     public static function removeObservers(ObserverInterface|StaticObserverInterface|string ...$observers): void;
